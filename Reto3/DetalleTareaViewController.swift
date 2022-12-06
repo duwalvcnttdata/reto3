@@ -24,9 +24,14 @@ class DetalleTareaViewController: UIViewController {
         editarTareaStoryboardID.delegate = listadoTareaDelegate
         navigationController?.pushViewController(editarTareaStoryboardID, animated: true)
     }
+    @IBAction func eliminarTarea(_ sender: UIButton) {
+        delegate?.eliminarTarea(id: tarea!.id)
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     var tarea: Tarea?
     var listadoTareaDelegate: TareasViewController?
+    var delegate: DetalleTareaViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,4 +47,8 @@ class DetalleTareaViewController: UIViewController {
             descripcionLabel.text = tarea!.descripcion
         }
     }
+}
+
+protocol DetalleTareaViewControllerDelegate {
+    func eliminarTarea (id: Int)
 }

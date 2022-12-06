@@ -57,6 +57,7 @@ extension TareasViewController: UITableViewDataSource, UITableViewDelegate {
         }
         detalleTareaStoryboard.tarea = listaTareas[indexPath.row]
         detalleTareaStoryboard.listadoTareaDelegate = self
+        detalleTareaStoryboard.delegate = self
         navigationController?.pushViewController(detalleTareaStoryboard, animated: true)
     }
     
@@ -81,5 +82,18 @@ extension TareasViewController: NuevaTareaViewControllerDelegate{
         listaTareas.append(tarea)
         tareaTableView.reloadData()
     }
+    
+}
+
+extension TareasViewController: DetalleTareaViewControllerDelegate{
+    func eliminarTarea(id: Int) {
+        if let index = listaTareas.firstIndex(where: { tareaSeleccionada in
+            return id == tareaSeleccionada.id
+        }){
+            listaTareas.remove(at: index)
+            tareaTableView.reloadData()
+        }
+    }
+    
     
 }
